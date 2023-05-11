@@ -4,45 +4,114 @@ import { ContactCard } from "../../cards/ContactCard";
 import Address from "../../assets/icons/Address.png";
 import Email from "../../assets/icons/Email.png";
 import Phone from "../../assets/icons/Phone.png";
+import { ContactModal } from "../../modal/ContactModal";
+import axios from "axios";
+import { MutatingDots } from "react-loader-spinner";
 
 export const ContactList = () => {
+  const [modal, setModal] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+
   const [contacts, setContacts] = useState([]);
+
+  const getContacts = async () => {
+    try {
+      setLoading(true);
+      setError(false);
+      const data = await axios
+        .get("https://645ce8d5250a246ae311e4d6.mockapi.io/contacts/users")
+        .then((res) => {
+          setContacts(res.data);
+        });
+    } catch (e) {
+      setError(true);
+    }
+    setLoading(false);
+  };
   useEffect(() => {
-    fetch("https://645ce8d5250a246ae311e4d6.mockapi.io/contacts/users")
-      .then((response) => response.json())
-      .then((data) => setContacts(data))
-      .catch((err) => {});
+    getContacts();
   }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get("https://645ce8d5250a246ae311e4d6.mockapi.io/contacts/users")
+  //     .then((data) => {
+  //       setContacts(data.data);
+  //     })
+  //     .catch((error) => {
+  //       setError(error);
+  //     });
+  // }, []);
+
+  // if (error) return <p>Error</p>;
   return (
     <div className="contact">
-      <button className="add-contact">Add Contact</button>
+      <button
+        className="add-contact"
+        onClick={() => {
+          setModal(true);
+        }}
+      >
+        Add Contact
+      </button>
+      {modal && (
+        <ContactModal
+          Submit={() => {
+            setModal(false);
+          }}
+        />
+      )}
       <div className="contact-card">
-        {contacts.map((contact) => {
-          return (
-            <ContactCard width="25%" bottom="3%">
-              <div className="contact-card-person">
-                <div>
-                  <h1>{contact.name}</h1>
-                  <h2>{contact.proffession}</h2>
+        {loading ? (
+          <MutatingDots
+            height="100"
+            width="100"
+            color="blue"
+            secondaryColor="lightblue"
+            radius="15.5"
+            ariaLabel="mutating-dots-loading"
+            wrapperStyle={{
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+            wrapperClass=""
+            visible={true}
+          />
+        ) : error ? (
+          <h3>Sorry, we were unable to display data</h3>
+        ) : (
+          contacts.map((contact) => {
+            return (
+              <ContactCard width="25%" bottom="3%">
+                <div className="contact-card-person">
+                  <span>
+                    <img width="50" src={contact.avatar} alt="avatar" />
+                    <div>
+                      <h1 key={contact.id}>{contact.name}</h1>
+                      <h2>{contact.proffession}</h2>
+                    </div>
+                  </span>
+                  <div>
+                    <span>
+                      <img width="23" src={Address} alt="Address" />
+                      <p>{contact.address}</p>
+                    </span>
+                    <span>
+                      <img width="20" src={Email} alt="Email" />
+                      <p>{contact.email}</p>
+                    </span>
+                    <span>
+                      <img width="20" src={Phone} alt="Phone" />
+                      <p>{contact.phone}</p>
+                    </span>
+                  </div>
                 </div>
-                <div>
-                  <span>
-                    <img width="23" src={Address} alt="Address" />
-                    <p>{contact.address}</p>
-                  </span>
-                  <span>
-                    <img width="20" src={Email} alt="Email" />
-                    <p>{contact.email}</p>
-                  </span>
-                  <span>
-                    <img width="20" src={Phone} alt="Phone" />
-                    <p>{contact.phone}</p>
-                  </span>
-                </div>
-              </div>
-            </ContactCard>
-          );
-        })}
+              </ContactCard>
+            );
+          })
+        )}
       </div>
     </div>
   );
