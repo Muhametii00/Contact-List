@@ -3,7 +3,7 @@ import "../styles/modal.css";
 import { ContactCard } from "../cards/ContactCard";
 import axios from "axios";
 
-export const ContactModal = ({ Submit }) => {
+export const ContactModal = ({ setModal }) => {
   const initialValues = {
     name: "",
     proffession: "",
@@ -20,18 +20,24 @@ export const ContactModal = ({ Submit }) => {
   const handleAddContact = (e) => {
     e.preventDefault();
     axios
-      .post("https://645ce8d5250a246ae311e4d6.mockapi.io/contacts/users", {
-        initialValues,
+      .post(
+        "https://645ce8d5250a246ae311e4d6.mockapi.io/contacts/users",
+        contact
+      )
+      .then((response) => {
+        setContact(response);
+        setModal(false);
       })
-      .then((res) => {
-        setContact(res.data);
+      .catch((error) => {
+        console.log(error);
       });
   };
+
   return (
     <div className="modal">
       <ContactCard background="#ffff" width="40%" height="80%">
         <h2>Let's add a contact</h2>
-        <form onSubmit={handleAddContact}>
+        <form>
           <input
             value={contact.name}
             onChange={(e) => handleChange("name", e.target.value)}
@@ -58,8 +64,8 @@ export const ContactModal = ({ Submit }) => {
             placeholder="Enter you phone number"
           />
           <div className="buttons">
-            <button onClick={Submit}>Cancel</button>
-            <button>Add Contact</button>
+            <button onClick={() => setModal(false)}>Cancel</button>
+            <button onClick={handleAddContact}>Save</button>
           </div>
         </form>
       </ContactCard>
