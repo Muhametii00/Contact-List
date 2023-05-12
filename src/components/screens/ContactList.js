@@ -19,7 +19,7 @@ export const ContactList = () => {
     try {
       setLoading(true);
       setError(false);
-      const data = await axios
+      await axios
         .get("https://645ce8d5250a246ae311e4d6.mockapi.io/contacts/users")
         .then((res) => {
           setContacts(res.data);
@@ -32,18 +32,7 @@ export const ContactList = () => {
   useEffect(() => {
     getContacts();
   }, []);
-  // useEffect(() => {
-  //   axios
-  //     .get("https://645ce8d5250a246ae311e4d6.mockapi.io/contacts/users")
-  //     .then((data) => {
-  //       setContacts(data.data);
-  //     })
-  //     .catch((error) => {
-  //       setError(error);
-  //     });
-  // }, []);
 
-  // if (error) return <p>Error</p>;
   return (
     <div className="contact">
       <button
@@ -64,30 +53,21 @@ export const ContactList = () => {
       <div className="contact-card">
         {loading ? (
           <MutatingDots
-            height="100"
-            width="100"
+            height="150"
+            width="150"
             color="blue"
             secondaryColor="lightblue"
-            radius="15.5"
-            ariaLabel="mutating-dots-loading"
-            wrapperStyle={{
-              width: "100%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-            wrapperClass=""
-            visible={true}
+            radius="20"
           />
         ) : error ? (
           <h3>Sorry, we were unable to display data</h3>
         ) : (
           contacts.map((contact) => {
             return (
-              <ContactCard width="25%" bottom="3%">
+              <ContactCard background="#f9f9f9" width="25%" bottom="3%">
                 <div className="contact-card-person">
                   <span>
-                    <img width="50" src={contact.avatar} alt="avatar" />
+                    <img width="70" src={contact.avatar} alt="avatar" />
                     <div>
                       <h1 key={contact.id}>{contact.name}</h1>
                       <h2>{contact.proffession}</h2>
