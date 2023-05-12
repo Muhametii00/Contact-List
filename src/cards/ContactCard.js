@@ -7,11 +7,12 @@ export const ContactCard = ({
   radius = "10px",
   border = "1px solid lightgrey",
   bottom,
+  background,
 }) => {
   return (
     <div
       style={{
-        backgroundColor: "#f9f9f9",
+        backgroundColor: background,
         width: width,
         height: height,
         borderRadius: radius,
