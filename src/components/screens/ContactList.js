@@ -43,13 +43,7 @@ export const ContactList = () => {
       >
         Add Contact
       </button>
-      {modal && (
-        <ContactModal
-          Submit={() => {
-            setModal(false);
-          }}
-        />
-      )}
+      {modal && <ContactModal setModal={setModal} />}
       <div className="contact-card">
         {loading ? (
           <MutatingDots
@@ -66,13 +60,10 @@ export const ContactList = () => {
             return (
               <ContactCard background="#f9f9f9" width="25%" bottom="3%">
                 <div className="contact-card-person">
-                  <span>
-                    <img width="70" src={contact.avatar} alt="avatar" />
-                    <div>
-                      <h1 key={contact.id}>{contact.name}</h1>
-                      <h2>{contact.proffession}</h2>
-                    </div>
-                  </span>
+                  <div>
+                    <h1 key={contact.id}>{contact.name}</h1>
+                    <h2>{contact.proffession}</h2>
+                  </div>
                   <div>
                     <span>
                       <img width="23" src={Address} alt="Address" />
