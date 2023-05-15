@@ -31,7 +31,7 @@ export const ContactList = () => {
   };
   useEffect(() => {
     getContacts();
-  }, []);
+  }, [modal]);
 
   return (
     <div className="contact">
@@ -59,10 +59,12 @@ export const ContactList = () => {
           contacts.map((contact) => {
             return (
               <ContactCard background="#f9f9f9" width="25%" bottom="3%">
-                <div className="contact-card-person">
+                <div key={contact.id} className="contact-card-person">
                   <div>
-                    <h1 key={contact.id}>{contact.name}</h1>
-                    <h2>{contact.proffession}</h2>
+                    <div>
+                      <h1>{contact.name}</h1>
+                      <h2>{contact.proffession}</h2>
+                    </div>
                   </div>
                   <div>
                     <span>
