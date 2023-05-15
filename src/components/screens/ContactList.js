@@ -8,13 +8,15 @@ import { ContactModal } from "../../modal/ContactModal";
 import axios from "axios";
 import { MutatingDots } from "react-loader-spinner";
 import { SuccessModal } from "../../modal/SuccessModal";
+import { FailedModal } from "../../modal/FailedModal";
 
 export const ContactList = () => {
   const [modal, setModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  const [message, setMessage] = useState(false);
+  const [succes, setSucces] = useState(false);
+  const [failed, setFailed] = useState(false);
 
   const [contacts, setContacts] = useState([]);
 
@@ -48,12 +50,14 @@ export const ContactList = () => {
       </button>
       {modal && (
         <ContactModal
-          setMessage={setMessage}
+          setSucces={setSucces}
           getContacts={getContacts}
           setModal={setModal}
+          setFailed={setFailed}
         />
       )}
-      {message && <SuccessModal />}
+      {failed && <FailedModal />}
+      {succes && <SuccessModal />}
       <div className="contact-card">
         {loading ? (
           <MutatingDots
