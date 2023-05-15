@@ -3,7 +3,7 @@ import "../styles/modal.css";
 import { ContactCard } from "../cards/ContactCard";
 import axios from "axios";
 
-export const ContactModal = ({ setModal, getContacts }) => {
+export const ContactModal = ({ setModal, getContacts, setMessage }) => {
   const initialValues = {
     name: "",
     proffession: "",
@@ -12,7 +12,6 @@ export const ContactModal = ({ setModal, getContacts }) => {
     phone: "",
   };
   const [contact, setContact] = useState(initialValues);
-  const [message, setMessage] = useState(null);
 
   const handleChange = (key, value) => {
     setContact({ ...contact, [key]: value });
@@ -27,21 +26,20 @@ export const ContactModal = ({ setModal, getContacts }) => {
       )
       .then((response) => {
         setContact(response.data);
-        setMessage("Contact added successfully", response.status);
-        setTimeout(() => {
-          setModal(false);
-        }, 2000);
-        getContacts();
-      })
-      .catch((response) => {
         setModal(false);
-        setMessage("Failed to add contact", response.status);
+        setMessage(response.status);
+        getContacts();
+        setTimeout(() => {
+          setMessage(false);
+        }, 2000);
+      })
+      .catch(() => {
+        setModal(false);
       });
   };
 
   return (
     <div className="modal">
-      {message && <p className="response-message">{message}</p>}
       <ContactCard background="#ffff" width="40%" height="80%">
         <h2>Let's add a contact</h2>
         <form>
