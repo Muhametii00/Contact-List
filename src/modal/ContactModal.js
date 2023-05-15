@@ -25,11 +25,11 @@ export const ContactModal = ({ setModal }) => {
         contact
       )
       .then((response) => {
-        setContact(response);
+        setContact(response.data);
         setModal(false);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        setModal(false);
       });
   };
 
