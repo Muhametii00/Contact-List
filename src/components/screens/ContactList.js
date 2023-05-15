@@ -58,8 +58,13 @@ export const ContactList = () => {
         ) : (
           contacts.map((contact) => {
             return (
-              <ContactCard background="#f9f9f9" width="25%" bottom="3%">
-                <div key={contact.id} className="contact-card-person">
+              <ContactCard
+                key={contact.id}
+                background="#f9f9f9"
+                width="25%"
+                bottom="3%"
+              >
+                <div className="contact-card-person">
                   <div>
                     <div>
                       <h1>{contact.name}</h1>
