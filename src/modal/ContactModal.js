@@ -51,9 +51,9 @@ export const ContactModal = ({
           setSucces(false);
         }, 2000);
       })
-      .catch(() => {
+      .catch((response) => {
         setModal(false);
-        setFailed(true);
+        setFailed(response.status);
         setTimeout(() => {
           setFailed(false);
         }, 2000);
