@@ -42,6 +42,7 @@
 }
 .contact-card-person h2 {
   width: 100%;
+  margin-top: 0;
   margin-left: 10%;
   font-size: 13px;
   font-weight: 400;
