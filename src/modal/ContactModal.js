@@ -12,6 +12,9 @@ export const ContactModal = ({ setModal, getContacts }) => {
     phone: "",
   };
   const [contact, setContact] = useState(initialValues);
+  const [message, setMessage] = useState(null);
+
+  const data = { message: "Contact added successfully" };
 
   const handleChange = (key, value) => {
     setContact({ ...contact, [key]: value });
@@ -26,16 +29,21 @@ export const ContactModal = ({ setModal, getContacts }) => {
       )
       .then((response) => {
         setContact(response.data);
-        setModal(false);
+        setMessage(data.message);
+        setTimeout(() => {
+          setModal(false);
+        }, 2000);
         getContacts();
       })
-      .catch(() => {
+      .catch((response) => {
         setModal(false);
+        setMessage(response.message);
       });
   };
 
   return (
     <div className="modal">
+      {message && <p className="response-message">{message}</p>}
       <ContactCard background="#ffff" width="40%" height="80%">
         <h2>Let's add a contact</h2>
         <form>
