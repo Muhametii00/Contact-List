@@ -7,11 +7,14 @@ import Phone from "../../assets/icons/Phone.png";
 import { ContactModal } from "../../modal/ContactModal";
 import axios from "axios";
 import { MutatingDots } from "react-loader-spinner";
+import { SuccessModal } from "../../modal/SuccessModal";
 
 export const ContactList = () => {
   const [modal, setModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+
+  const [message, setMessage] = useState(false);
 
   const [contacts, setContacts] = useState([]);
 
@@ -43,7 +46,14 @@ export const ContactList = () => {
       >
         Add Contact
       </button>
-      {modal && <ContactModal getContacts={getContacts} setModal={setModal} />}
+      {modal && (
+        <ContactModal
+          setMessage={setMessage}
+          getContacts={getContacts}
+          setModal={setModal}
+        />
+      )}
+      {message && <SuccessModal />}
       <div className="contact-card">
         {loading ? (
           <MutatingDots
