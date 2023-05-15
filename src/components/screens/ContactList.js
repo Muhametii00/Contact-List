@@ -54,7 +54,7 @@ export const ContactList = () => {
             radius="20"
           />
         ) : error ? (
-          <h3>Sorry, we were unable to display data</h3>
+          <h3>Unable to display Contacts!</h3>
         ) : (
           contacts.map((contact) => {
             return (
