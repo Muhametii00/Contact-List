@@ -31,7 +31,7 @@ export const ContactList = () => {
   };
   useEffect(() => {
     getContacts();
-  }, [modal]);
+  }, []);
 
   return (
     <div className="contact">
@@ -43,7 +43,7 @@ export const ContactList = () => {
       >
         Add Contact
       </button>
-      {modal && <ContactModal setModal={setModal} />}
+      {modal && <ContactModal getContacts={getContacts} setModal={setModal} />}
       <div className="contact-card">
         {loading ? (
           <MutatingDots
