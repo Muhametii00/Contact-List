@@ -11,7 +11,20 @@ export const ContactModal = ({ setModal, getContacts, setMessage }) => {
     email: "",
     phone: "",
   };
+
   const [contact, setContact] = useState(initialValues);
+
+  const isEnabled = () => {
+    if (
+      contact.name &&
+      contact.proffession &&
+      contact.address &&
+      contact.email &&
+      contact.phone
+    )
+      return false;
+    return true;
+  };
 
   const handleChange = (key, value) => {
     setContact({ ...contact, [key]: value });
@@ -70,7 +83,9 @@ export const ContactModal = ({ setModal, getContacts, setMessage }) => {
           />
           <div className="buttons">
             <button onClick={() => setModal(false)}>Cancel</button>
-            <button onClick={handleAddContact}>Save</button>
+            <button disabled={isEnabled()} onClick={handleAddContact}>
+              Save
+            </button>
           </div>
         </form>
       </ContactCard>
