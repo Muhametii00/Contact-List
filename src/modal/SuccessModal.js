@@ -21,7 +21,7 @@ export const SuccessModal = () => {
         zIndex: "999",
       }}
     >
-      <ContactCard background="#ffff" width="40%" height="20%">
+      <ContactCard background="#ffff" width="40%" height="17%">
         <div
           style={{
             display: "flex",
