@@ -34,12 +34,14 @@
   margin-left: 5%;
 }
 .contact-card-person h1 {
+  width: 100%;
   margin-left: 10%;
   font-size: 17px;
   font-weight: 600;
   font-style: normal;
 }
 .contact-card-person h2 {
+  width: 100%;
   margin-left: 10%;
   font-size: 13px;
   font-weight: 400;
