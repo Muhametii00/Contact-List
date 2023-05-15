@@ -14,8 +14,6 @@ export const ContactModal = ({ setModal, getContacts }) => {
   const [contact, setContact] = useState(initialValues);
   const [message, setMessage] = useState(null);
 
-  const data = { message: "Contact added successfully" };
-
   const handleChange = (key, value) => {
     setContact({ ...contact, [key]: value });
   };
@@ -29,7 +27,7 @@ export const ContactModal = ({ setModal, getContacts }) => {
       )
       .then((response) => {
         setContact(response.data);
-        setMessage(data.message);
+        setMessage("Contact added successfully", response.status);
         setTimeout(() => {
           setModal(false);
         }, 2000);
@@ -37,7 +35,7 @@ export const ContactModal = ({ setModal, getContacts }) => {
       })
       .catch((response) => {
         setModal(false);
-        setMessage(response.message);
+        setMessage("Failed to add contact", response.status);
       });
   };
 
