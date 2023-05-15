@@ -3,7 +3,12 @@ import "../styles/modal.css";
 import { ContactCard } from "../cards/ContactCard";
 import axios from "axios";
 
-export const ContactModal = ({ setModal, getContacts, setMessage }) => {
+export const ContactModal = ({
+  setModal,
+  getContacts,
+  setSucces,
+  setFailed,
+}) => {
   const initialValues = {
     name: "",
     proffession: "",
@@ -40,14 +45,18 @@ export const ContactModal = ({ setModal, getContacts, setMessage }) => {
       .then((response) => {
         setContact(response.data);
         setModal(false);
-        setMessage(response.status);
+        setSucces(response.status);
         getContacts();
         setTimeout(() => {
-          setMessage(false);
+          setSucces(false);
         }, 2000);
       })
       .catch(() => {
         setModal(false);
+        setFailed(true);
+        setTimeout(() => {
+          setFailed(false);
+        }, 2000);
       });
   };
 
