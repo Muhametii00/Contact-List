@@ -90,12 +90,10 @@ export const ContactList = () => {
                 bottom="3%"
               >
                 <div className="contact-card-person">
+                  <div className="delete">
+                    <button onClick={() => handleDelete(contact.id)}>X</button>
+                  </div>
                   <div>
-                    <div className="delete">
-                      <button onClick={() => handleDelete(contact.id)}>
-                        X
-                      </button>
-                    </div>
                     <div>
                       <h1>{contact.name}</h1>
                       <h2>{contact.proffession}</h2>
