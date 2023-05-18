@@ -8,10 +8,10 @@ export const About = () => {
       <div className="about-text">
         <h1>Welcome to our Contact Lists Application!</h1>
         <p>
-          At [Application Name], we understand the importance of keeping your
-          contacts organized and easily accessible. Our application is designed
-          to simplify the way you manage your contacts, ensuring you never lose
-          touch with the people who matter most to you.
+          We understand the importance of keeping your contacts organized and
+          easily accessible. Our application is designed to simplify the way you
+          manage your contacts, ensuring you never lose touch with the people
+          who matter most to you.
         </p>
         <p>
           With our Contact Lists Application, you can effortlessly store,
@@ -69,7 +69,7 @@ export const About = () => {
           </li>
         </ol>
         <p>
-          At [Application Name], our goal is to provide you with a seamless,
+          At this Contact List, our goal is to provide you with a seamless,
           efficient, and reliable solution for managing your contact lists. We
           are dedicated to continually improving our application to meet your
           evolving needs, so you can focus on building and nurturing your
